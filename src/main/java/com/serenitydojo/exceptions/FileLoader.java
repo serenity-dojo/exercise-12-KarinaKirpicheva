@@ -12,18 +12,18 @@ public class FileLoader {
     public boolean fileContainsText(String filename, String expectedText) {
         String path = "src/main/resources/" + filename;
         try {
-            return (Files.readString(Paths.get(path)).contains(expectedText));
-        } catch (IOException e) {
+            return Files.readString(Paths.get(path)).contains(expectedText);
+        } catch (IOException fileDoesNotExist) {
             return false;
         }
     }
 
-    public boolean fileHasText(String filename, String expectedText) {
+    public Boolean fileHasText(String filename, String expectedText )  {
         String path = "src/main/resources/" + filename;
         try {
-            return (Files.readString(Paths.get(path)).contains(expectedText));
-        } catch (IOException e) {
-            throw new MissingWelcomeFileException("Missing welcome file: " + filename, e);
+            return Files.readString(Paths.get(path)).contains(expectedText);
+        } catch (IOException fileDoesNotExist) {
+            throw new  MissingWelcomeFileException("This file does not exist: " + filename , fileDoesNotExist);
         }
     }
 }
